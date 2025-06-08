@@ -1,7 +1,7 @@
 import cookieParser from 'cookie-parser';
-import express from 'express'
+import express from 'express';
 import { dbConnect } from './config/database.js';
-import userRouter from './routes/user.js'
+import userRouter from './routes/user.js';
 import cors from 'cors';
 import multer from 'multer';
 const upload = multer();
@@ -14,20 +14,27 @@ const app = express();
 
 dbConnect();
 cloudConfig();
+
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.urlencoded({ extended: true })); 
+app.use(express.urlencoded({ extended: true }));
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://your-actual-frontend-url.vercel.app" 
+];
 
-app.use(cors({
-    origin: "http://localhost:5173",
-    credentials: true
-}));
+const corsOptions = {
+  origin: allowedOrigins,
+  credentials: true,
+};
 
+app.use(cors(corsOptions));
 
-app.use("/user",userRouter)
+app.options("*", cors(corsOptions));
 
+app.use("/user", userRouter);
 
-app.listen(process.env.PORT, () => {
-    console.log('Great Going Just Deployed');
-})
+app.listen(process.env.PORT || 4000, () => {
+  console.log('Great Going Just Deployed');
+});
