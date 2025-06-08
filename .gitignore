@@ -1,0 +1,9 @@
+# Node modules (huge folder, recreated by npm install)
+node_modules/
+
+# Environment variables (secrets like API keys)
+.env
+
+# IDE folders
+.vscode/
+.idea/
