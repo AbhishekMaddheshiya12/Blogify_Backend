@@ -22,7 +22,8 @@ app.use(express.urlencoded({ extended: true }));
 const allowedOrigins = [
     "http://localhost:5173",
   "https://blogify-frontend-p4bq.vercel.app",
-  "https://blogify-frontend-two.vercel.app"
+  "https://blogify-frontend-two.vercel.app",
+  "https://blogify-frontend-wn8q.vercel.app"
 ];
 
 const corsOptions = {
